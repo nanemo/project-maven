@@ -132,7 +132,6 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>3.3.0</version>
                 <configuration>
-                    <!--Все зависимости которые нужны для работы твоего приложения будут лежать здесь-->
                     <outputDirectory>${project.build.directory}/lib/</outputDirectory>
                     <overWriteReleases>true</overWriteReleases>
                     <overWriteSnapshots>true</overWriteSnapshots>
