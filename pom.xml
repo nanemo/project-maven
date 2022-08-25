@@ -14,7 +14,13 @@
         <versionOfCommons-Lang3Dependency>3.12.0</versionOfCommons-Lang3Dependency>
         <versionOfJavaFxDependency>18.0.1</versionOfJavaFxDependency>
         <versionOfGameEngineDependency>1.0</versionOfGameEngineDependency>
-        <versionOfJUnit>5.8.2</versionOfJUnit>
+        <versionOfJUnitDependency>5.8.2</versionOfJUnitDependency>
+        <versionOfResource>3.3.0</versionOfResource>
+        <versionOfCompilerPlugin>3.10.1</versionOfCompilerPlugin>
+        <versionOfJavaFxPlugin>0.0.8</versionOfJavaFxPlugin>
+        <versionOfJarPlugin>3.2.2</versionOfJarPlugin>
+        <versionOfSurefirePlugin>3.0.0-M7</versionOfSurefirePlugin>
+        <versionOfDependencyPlugin>3.3.0</versionOfDependencyPlugin>
     </properties>
 
     <dependencies>
@@ -33,79 +39,47 @@
             <artifactId>desktop-game-engine</artifactId>
             <version>${versionOfGameEngineDependency}</version>
             <scope>system</scope>
-            <systemPath>C:/Users/nnbak/netbeans/JavaRushWithUltimate/project-maven/lib/desktop-game-engine.jar</systemPath>
+            <systemPath>C:/Users/nnbak/netbeans/JavaRushWithUltimate/project-maven/lib/desktop-game-engine.jar
+            </systemPath>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>${versionOfJUnit}</version>
+            <version>${versionOfJUnitDependency}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.3.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>0.0.8</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.2.2</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.3.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.0.0-M7</version>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-
         <plugins>
             <!-- Usual compilation -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version>
+                <version>${versionOfCompilerPlugin}</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
                     <compilerVersion>18</compilerVersion>
                 </configuration>
             </plugin>
-
             <!-- Run java-fx app over Maven -->
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
-                <version>0.0.8</version>
+                <version>${versionOfJavaFxPlugin}</version>
                 <configuration>
                     <mainClass>com.javarush.games.racer.RacerGame</mainClass>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.2</version>
+                <version>${versionOfJarPlugin}</version>
                 <configuration>
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <classpathLayoutType>simple</classpathLayoutType>
                             <mainClass>org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader</mainClass>
                         </manifest>
                         <manifestEntries>
@@ -115,22 +89,20 @@
                     <outputDirectory>artifacts</outputDirectory>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M7</version>
+                <version>${versionOfSurefirePlugin}</version>
                 <configuration>
                     <excludes>
                         <exclude>StrangeTest.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>${versionOfDependencyPlugin}</version>
                 <configuration>
                     <outputDirectory>${project.build.directory}/lib/</outputDirectory>
                     <overWriteReleases>true</overWriteReleases>
@@ -148,10 +120,5 @@
                 </executions>
             </plugin>
         </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-        </resources>
     </build>
 </project>
