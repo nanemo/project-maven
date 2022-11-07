@@ -39,7 +39,7 @@
             <artifactId>desktop-game-engine</artifactId>
             <version>${versionOfGameEngineDependency}</version>
             <scope>system</scope>
-            <systemPath>C:/Users/nnbak/netbeans/JavaRushWithUltimate/project-maven/lib/desktop-game-engine.jar
+            <systemPath>C:/Users/nnbak/netbeans/JavaRushModule3/project-maven/lib/desktop-game-engine.jar
             </systemPath>
         </dependency>
         <dependency>
