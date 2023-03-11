@@ -11,10 +11,48 @@
     <properties>
         <maven.compiler.source>18</maven.compiler.source>
         <maven.compiler.target>18</maven.compiler.target>
+        <versionOfCommons-Lang3Dependency>3.12.0</versionOfCommons-Lang3Dependency>
+        <versionOfJavaFxDependency>18.0.1</versionOfJavaFxDependency>
+        <versionOfGameEngineDependency>1.0</versionOfGameEngineDependency>
+        <versionOfJUnitDependency>5.8.2</versionOfJUnitDependency>
+        <versionOfResource>3.3.0</versionOfResource>
+        <versionOfCompilerPlugin>3.10.1</versionOfCompilerPlugin>
+        <versionOfJavaFxPlugin>0.0.8</versionOfJavaFxPlugin>
+        <versionOfJarPlugin>3.2.2</versionOfJarPlugin>
+        <versionOfSurefirePlugin>3.0.0-M7</versionOfSurefirePlugin>
+        <versionOfDependencyPlugin>3.3.0</versionOfDependencyPlugin>
     </properties>
 
     <dependencies>
-
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${versionOfCommons-Lang3Dependency}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${versionOfJavaFxDependency}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.javarush</groupId>
+            <artifactId>desktop-game-engine</artifactId>
+            <version>${versionOfGameEngineDependency}</version>
+            <scope>system</scope>
+            <systemPath>C:/Users/nnbak/netbeans/JavaRushModule3/project-maven/lib/desktop-game-engine.jar
+            </systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${versionOfJUnitDependency}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.plexus</groupId>
+            <artifactId>plexus-utils</artifactId>
+            <version>3.4.2</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -23,22 +61,83 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version>
+                <version>${versionOfCompilerPlugin}</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
+                    <compilerVersion>18</compilerVersion>
                 </configuration>
             </plugin>
-
             <!-- Run java-fx app over Maven -->
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
-                <version>0.0.8</version>
+                <version>${versionOfJavaFxPlugin}</version>
                 <configuration>
                     <mainClass>com.javarush.games.racer.RacerGame</mainClass>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${versionOfJarPlugin}</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader</mainClass>
+                        </manifest>
+                        <manifestEntries>
+                            <Rsrc-Class-Path>com.javarush.games.racer.RacerGame</Rsrc-Class-Path>
+                        </manifestEntries>
+                    </archive>
+                    <outputDirectory>artifacts</outputDirectory>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${versionOfSurefirePlugin}</version>
+                <configuration>
+                    <excludes>
+                        <exclude>StrangeTest.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>${versionOfDependencyPlugin}</version>
+                <configuration>
+                    <outputDirectory>${project.build.directory}/lib/</outputDirectory>
+                    <overWriteReleases>true</overWriteReleases>
+                    <overWriteSnapshots>true</overWriteSnapshots>
+                    <overWriteIfNewer>true</overWriteIfNewer>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
-
 </project>
